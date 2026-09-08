@@ -1,26 +1,144 @@
-# EC IA - Trabalho 01 - 2026/2
+# Busca Não Informada, Busca Informada e Busca Local
 
-Material público do Trabalho 01 da disciplina de Inteligência Artificial.
+![Python](https://img.shields.io/badge/LANG-Python-green.svg)
+![VSCode](https://img.shields.io/badge/IDE-VSCode-informational)
+![ISO](https://img.shields.io/badge/ISO-Linux-blueviolet)
 
-## Informações principais
-
-- **Valor:** 20,0 pontos.
-- **Modalidade:** individual ou em dupla.
-- **Linguagem:** Python.
-- **Parte 1 - Busca não informada e informada:** entrega em **08/10/2026**.
-- **Parte 2 - Busca local e entrega final:** entrega em **15/10/2026**.
-
-Leia primeiro o arquivo **`EC_IA_Trabalho_01_2026.pdf`**. O enunciado prevalece sobre qualquer resumo apresentado neste README.
-
-## Identificação da entrega
-
-Preencha estes dados antes de cada submissão:
-
-- **Aluno(a) 1:** `<nome>`
-- **Aluno(a) 2:** `<nome ou não se aplica>`
-- **Repositório Git:** `<link do repositório>`
+- **Aluno(a) 1:** `Júlia de Moura Souza`
+- **Aluno(a) 2:** `Lorena Ávila `
+- **Repositório Git:** [`link do repositório`](https://github.com/msjujubr/Uninformed-Informed-and-Local-Search)
 - **Tag:** `entrega-parte1` ou `entrega-final`
 
+  - **Parte 1 - Busca não informada e informada:** entrega em **08/10/2026**.
+    
+  - **Parte 2 - Busca local e entrega final:** entrega em **15/10/2026**.
+
+<div align="center"> <table> <tr> <td>
+ 
+# 📖 Sumário
+
+* [Sobre o Projeto](#sobre-o-projeto)
+
+* [Especificação do Problema](#especificação-do-problema)
+
+  * [Parte 1 — Busca em Ambiente Ponderado](#parte-1--busca-em-ambiente-ponderado)
+  * [Parte 2 — Problema das 8 Rainhas](#parte-2--problema-das-8-rainhas)
+
+* [Estrutura do Projeto](#estrutura-do-projeto)
+
+  * [Organização dos Arquivos](#organização-dos-arquivos)
+  * [Mapas e Dados de Entrada](#mapas-e-dados-de-entrada)
+  * [Testes](#testes)
+  * [Resultados](#resultados)
+
+* [Algoritmos Implementados](#algoritmos-implementados)
+
+  * [Busca em Largura — BFS](#busca-em-largura--bfs)
+  * [Busca em Profundidade — DFS](#busca-em-profundidade--dfs)
+  * [Busca de Custo Uniforme — UCS](#busca-de-custo-uniforme--ucs)
+  * [Busca Gulosa](#busca-gulosa)
+  * [A*](#a)
+  * [Hill Climbing](#hill-climbing)
+  * [Random-Restart Hill Climbing](#random-restart-hill-climbing)
+
+* [Heurísticas](#heurísticas)
+
+  * [Heurística de Manhattan](#heurística-de-manhattan)
+  * [Heurística Euclidiana](#heurística-euclidiana)
+
+* [Regras de Busca](#regras-de-busca)
+
+  * [Ordem dos Sucessores](#ordem-dos-sucessores)
+  * [Critérios de Desempate](#critérios-de-desempate)
+  * [Tratamento de Estados Repetidos](#tratamento-de-estados-repetidos)
+
+* [Compilação, Instalação e Execução](#compilação-instalação-e-execução)
+
+  * [Requisitos](#requisitos)
+  * [Instalação](#instalação)
+  * [Execução da Parte 1](#execução-da-parte-1)
+  * [Execução da Parte 2](#execução-da-parte-2)
+  * [Reprodução dos Resultados](#reprodução-dos-resultados)
+
+* [Entradas e Saídas](#entradas-e-saídas)
+
+  * [Formato do Mapa](#formato-do-mapa)
+  * [Saída dos Algoritmos de Busca](#saída-dos-algoritmos-de-busca)
+  * [Saída dos Experimentos](#saída-dos-experimentos)
+
+* [Testes](#testes)
+
+  * [Início Adjacente ao Objetivo](#início-adjacente-ao-objetivo)
+  * [Mapa Sem Solução](#mapa-sem-solução)
+  * [Mapa com Ciclos](#mapa-com-ciclos)
+  * [Rotas com Mesmo Número de Ações](#rotas-com-mesmo-número-de-ações)
+  * [Rota Curta e Cara vs. Rota Longa e Barata](#rota-curta-e-cara-vs-rota-longa-e-barata)
+
+* [Métricas e Resultados](#métricas-e-resultados)
+
+  * [Métricas da Parte 1](#métricas-da-parte-1)
+  * [Experimentos das 8 Rainhas](#experimentos-das-8-rainhas)
+  * [Sementes Utilizadas](#sementes-utilizadas)
+
+* [Reprodutibilidade](#reprodutibilidade)
+
+  * [Versões das Entregas](#versões-das-entregas)
+  * [Tags do Repositório](#tags-do-repositório)
+
+* [Uso de Inteligência Artificial](#uso-de-inteligência-artificial)
+
+* [Referências](#referências)
+
+
+
+# Sobre o Projeto
+
+Este projeto foi desenvolvido para a disciplina **Inteligência Artificial** do CEFET-MG (Campus Divinópolis), sob a orientação do [Prof. Tiago Alves de Oliveira](https://github.com/tiagofga), no semestre 2026/2.
+
+O objetivo principal do trabalho é implementar, comparar e analisar empiricamente diferentes estratégias de busca não informada, busca informada e busca local. A avaliação abrange sobre representação de estados, estruturas de dados, funções de custo e de avaliação, heurísticas, critérios de expansão e interpretação dos resultados de execução.
+
+# Especificação do Problema
+
+## Parte 1 — Busca em Ambiente Ponderado
+
+Na Parte 1, um agente deve navegar em um ambiente bidimensional representado por uma grade retangular. O objetivo é encontrar um caminho válido entre o estado inicial ($S$) e o objetivo ($G$), contornando obstáculos (#) e minimizando o custo de travessia do terreno.
+
+A movimentação é restrita a quatro direções (Norte, Leste, Sul, Oeste). O custo de cada ação é determinado exclusivamente pela célula de destino.
+
+## Parte 2 — Problema das 8 Rainhas
+
+Na Parte 2, aborda-se o problema clássico de posicionar 8 rainhas em um tabuleiro de xadrez de dimensão $8 \times 8$ de modo que nenhuma rainha ataque outra (ou seja, que não compartilhem a mesma linha, coluna ou diagonal).
+
+
+# Estrutura do Projeto
+
+## Organização dos Arquivos
+
+```text
+│
+├── data/
+│   └── mapa_teste.txt
+├── src/
+│   ├── parte1/
+│   │   ├── algorithms.py
+│   │   ├── heuristics.py
+│   │   └── environment.py
+│   └── parte2/
+│       ├── hill_climbing.py
+│       └── queens.py
+├── tests/
+│   └── test_cases.py
+├── results/
+│   └── experiment_results.csv
+├── IA_USAGE.md
+├── README.md
+├── requirements.txt
+└── run_experiments.py
+
+```
+
+---- 
+----
 
 
 ## Entrega no SIGAA e repositório Git
