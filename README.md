@@ -4,8 +4,7 @@
 ![VSCode](https://img.shields.io/badge/IDE-VSCode-informational)
 ![ISO](https://img.shields.io/badge/ISO-Linux-blueviolet)
 
-- **Aluno(a) 1:** `Júlia de Moura Souza`
-- **Aluno(a) 2:** `Lorena Ávila `
+- **Aluno(a):** `Júlia de Moura Souza`
 - **Repositório Git:** [`link do repositório`](https://github.com/msjujubr/Uninformed-Informed-and-Local-Search)
 - **Tag:** `entrega-parte1` ou `entrega-final`
 
