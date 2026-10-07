@@ -1,0 +1,62 @@
+# ambientes virtuais
+.venv/
+venv/
+env/
+
+# cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# build
+build/
+dist/
+*.egg-info/
+
+# testes / cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# type checkers / linters
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# jupyter
+.ipynb_checkpoints/
+
+# arquivos do LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.sty
+*.tex
+*.dvi
+*.ps
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# sistema operacional
+.DS_Store
+Thumbs.db
+
+# arquivos temporarios
+*.tmp
+*.temp
+*~

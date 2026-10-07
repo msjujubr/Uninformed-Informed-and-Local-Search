@@ -1,2 +1,0 @@
-# O código-base utiliza apenas a biblioteca padrão do Python.
-# Adicione aqui bibliotecas externas utilizadas pela equipe, se houver.
