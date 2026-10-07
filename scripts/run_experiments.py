@@ -129,6 +129,7 @@ def run_part1(map_path: Path) -> None:
 def run_part2() -> None:
     "Experimento 8 rainhas"
 
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", help="Subcomandos disponiveis")
@@ -159,3 +160,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+#####
