@@ -7,6 +7,9 @@ from pathlib import Path
 from random import Random
 from typing import Callable, Optional, Tuple
 
+# Adiciona a raiz do projeto ao PYTHONPATH para reconhecer o pacote 'src'
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 from src.eight_queens import initial_board, render
 from src.heuristics import euclidean, manhattan
 from src.hill_climbing import hill_climbing, random_restart
@@ -127,7 +130,49 @@ def run_part1(map_path: Path) -> None:
 
 # Bateria de experimentos - 8 rainhas
 def run_part2() -> None:
-    "Experimento 8 rainhas"
+    print("Executando experimentos da Parte 2 (8 Rainhas - Sementes 0..99)...")
+
+    hc_successes = 0
+    hc_iterations = []
+    hc_evaluations = []
+
+    rr_successes = 0
+    rr_iterations = []
+    rr_evaluations = []
+    rr_restarts_list = []
+
+    for seed in range(100):
+        # Hill Climbing
+        rng_hc = Random(seed)
+        init_board_hc = initial_board(rng_hc)
+        res_hc = hill_climbing(init_board_hc)
+        
+        if res_hc.success:
+            hc_successes += 1
+        hc_iterations.append(res_hc.iterations)
+        hc_evaluations.append(res_hc.evaluated_states)
+
+        # Random-Restart Hill Climbing 
+        rng_rr = Random(seed)
+        res_rr = random_restart(rng_rr, max_restarts=50)
+        
+        if res_rr.success:
+            rr_successes += 1
+        rr_iterations.append(res_rr.iterations)
+        rr_evaluations.append(res_rr.evaluated_states)
+        rr_restarts_list.append(res_rr.restarts)
+
+    print("\n Resultados Hill Climbing Básico ")
+    print(f"Taxa de Sucesso: {hc_successes}%")
+    print(f"Média de Iterações: {statistics.mean(hc_iterations):.2f} (Mediana: {statistics.median(hc_iterations)})")
+    print(f"Média de Estados Avaliados: {statistics.mean(hc_evaluations):.2f}")
+
+    print("\n Resultados Random-Restart Hill Climbing ")
+    print(f"Taxa de Sucesso: {rr_successes}%")
+    print(f"Média de Iterações: {statistics.mean(rr_iterations):.2f} (Mediana: {statistics.median(rr_iterations)})")
+    print(f"Média de Estados Avaliados: {statistics.mean(rr_evaluations):.2f}")
+    print(f"Média de Reinícios: {statistics.mean(rr_restarts_list):.2f} (Máximo: {max(rr_restarts_list)})")
+
 
 
 def main() -> None:
@@ -152,14 +197,11 @@ def main() -> None:
         run_part1(args.map)
         run_part2()
     else:
-        # Se nenhum parâmetro for fornecido, roda os experimentos padrao
+        # Se nenhum parametro for fornecido, roda os experimentos padrao
         default_map = Path("data/mapa_teste.txt")
-        run_part1(default_map)
-        #run_part2()
+        #run_part1(default_map)
+        run_part2()
 
 
 if __name__ == "__main__":
     main()
-
-
-#####

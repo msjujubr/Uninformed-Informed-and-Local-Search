@@ -11,17 +11,28 @@ def initial_board(rng: Random) -> Board:
     return [rng.randrange(N) for _ in range(N)]
 
 
+# Retorna o numero de pares nao ordenados de rainhas que se atacam
 def conflicts(board: Board) -> int:
-    """Retorne o número de pares não ordenados de rainhas que se atacam."""
-    raise NotImplementedError("Implemente conflicts().")
+    cont = 0
+    for c1 in range(N):
+        r1 = board[c1]
+        for c2 in range(c1+1, N):
+            r2 = board[c2]
+            if r1 == r2 or abs(r1 - r2) == abs(c1 - c2):
+                # se estiverem na mesma linha/diagonal
+                cont += 1
+    return cont
 
 
+# Gera a vizinhanca na ordem: 
+# coluna 0..7; dentro de cada coluna, linha 0..7, exceto a linha atual.
 def moves(board: Board) -> Iterable[Move]:
-    """
-    Gere a vizinhança na ordem obrigatória:
-    coluna 0..7; dentro de cada coluna, linha 0..7, exceto a linha atual.
-    """
-    raise NotImplementedError("Implemente moves().")
+    for col in range(N):
+        current_row = board[col]
+        for row in range(N):
+            if row != current_row:
+                yield (col, row)
+
 
 
 def apply_move(board: Board, move: Move) -> Board:

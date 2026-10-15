@@ -6,9 +6,10 @@ Preencha esta seção para toda ferramenta de IA generativa utilizada durante o 
 |---        |---                                            |---                        |---                                            |   
 | ChatGPT   | Revisão e Estruturação do exercício proposto  | Compreensão do trabalho   | Estrutura e Organização do projeto inicial    |
 | Gemini    | Revisão do arquivo search.py                  | search.py                 | Correção da busca com  A*                     |
-| ChatGPT   | Entender módulo argparse                      | run_experiments.py        | Entendimento do módulo utilizado
+| ChatGPT   | Entender módulo argparse                      | run_experiments.py        | Entendimento do módulo utilizado              |
 | Gemini    | Correção run_experiments.py                   | Formatação de acordo com o enunciado | Correção da execução do projeto    |
-
+| Gemini    | Estruturação do arquivo Hill Climbing         | hill_climbing.py          | Verificado pela resposta fornecida            |
+| Gemini    | Revisão dos documentos                        | README.py e relatorio.pdf | Revisão humana                                |
 
 ## Declaração
 

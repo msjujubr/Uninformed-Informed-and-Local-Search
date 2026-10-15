@@ -6,11 +6,8 @@
 
 - **Aluno(a):** `Júlia de Moura Souza`
 - **Repositório Git:** [`link do repositório`](https://github.com/msjujubr/Uninformed-Informed-and-Local-Search)
-- **Tag:** `entrega-parte1`
+- **Tag:** `entrega-final`
 
-  - **Parte 1 - Busca não informada e informada:** entrega em **08/10/2026**.
-    
-  - **Parte 2 - Busca local e entrega final:** entrega em **15/10/2026**.
 
 <div align="center"> <table> <tr> <td>
  
@@ -72,115 +69,82 @@ Serão implementadas:
 └── README.md
 ```
 
-### 08/10/2026 - Parte 1
+## Teste inicial do código-base
 
-No SIGAA, envie um arquivo `.zip` com a versão executável da Parte 1. Antes da entrega, crie no repositório a tag:
+Antes de implementar ou executar os algoritmos, certifique-se de que o ambiente está correto rodando os testes unitários:
+Bash
 
 ```bash
-git tag entrega-parte1
-git push origin entrega-parte1
+python -m unittest discover -s tests -v
 ```
 
-O `README.md` da entrega deve informar o endereço do repositório e a tag `entrega-parte1`. Não é necessário entregar o relatório final nesta etapa.
+Sempre execute os comandos a partir da raiz do projeto (onde estão os diretórios src/, data/, scripts/, etc.).
 
-### 15/10/2026 - Entrega final
 
-No SIGAA, envie:
 
-- o relatório final em PDF;
-- um arquivo `.zip` com o projeto completo.
 
-Antes da entrega, crie no repositório a tag:
+## Parte 1 — Busca em Ambiente Ponderado (busca)
+
+Para executar um único algoritmo de busca e visualizar o caminho no mapa:
+
+A com Heurística Manhattan:*
+
+```bash
+    python -m src.main busca --map data/mapa_teste.txt --algorithm astar --heuristic manhattan
+```
+
+Busca Gulosa com Heurística Euclidiana:
+
+
+```bash
+    python -m src.main busca --map data/mapa_teste.txt --algorithm greedy --heuristic euclidean
+```
+
+Busca em Largura (BFS):
+
+```bash
+    python -m src.main busca --map data/mapa_teste.txt --algorithm bfs
+```
+
+Busca em Profundidade (DFS):
+
+```bash
+    python -m src.main busca --map data/mapa_teste.txt --algorithm dfs
+```
+    Busca de Custo Uniforme (UCS):
+   
+```bash
+    python -m src.main busca --map data/mapa_teste.txt --algorithm uniform_cost
+```
+
+Caso opte por executar a bateria de testes:
+```bash
+python scripts/run_experiments.py experimentos
+```
+
+
+## 2. Parte 2 — Problema das 8 Rainhas (rainhas)
+
+Para executar os algoritmos de busca local para o problema das 8 Rainhas:
+
+Hill Climbing:
+
+```bash
+    python -m src.main rainhas --algorithm hill --seed 42
+```
+
+Random-Restart Hill Climbing:
+```bash
+    python -m src.main rainhas --algorithm restart --seed 42 --max-restarts 50
+```
+
+
+
 
 ```bash
 git tag entrega-final
 git push origin entrega-final
 ```
 
-
-
-## Parte 2 - Busca local
-
-Devem ser implementados para o problema das 8 Rainhas:
-
-Exemplos:
-
-```bash
-python -m scripts.run_experiments rainhas --algorithm hill --seed 42
-python -m scripts.run_experiments rainhas --algorithm restart --seed 42 --max-restarts 50
-```
-
-## Teste inicial do código-base
-
-Antes de implementar os algoritmos, execute:
-
-```bash
-python -m unittest discover -s tests -v
-```
-
-
----
----
----
----
----
-
-## Orientações de Execução e Observações do Projeto
-> **Importante:** Sempre execute os comandos a partir da **raiz do projeto** (onde estão os diretórios `src/`, `data/`, `scripts/`, etc.).
-
-### 1. Bateria Completa de Experimentos da Parte 1 (`run_part1`)
-
-A execução dos experimentos da Parte 1 roda todos os algoritmos de busca (BFS, DFS, UCS, Gulosa e A*) com suas respectivas heurísticas no mapa informado, coletando métricas como passos, custo, nós gerados/expandidos e tempo de execução.
-
-#### Modo Padrão (Sem parâmetros)
-Executa a bateria de testes utilizando o mapa padrão `data/mapa_teste.txt`:
-
-```bash
-python -m scripts.run_experiments
-```
-
-#### Modo Explícito (`experimentos`)
-Executa especificamente a suíte de experimentos:
-
-```bash
-python -m scripts.run_experiments experimentos
-```
-
-#### Especificando um Mapa Alternativo
-Para testar a bateria de experimentos em outro mapa:
-
-```bash
-python -m scripts.run_experiments experimentos --map data/outro_mapa.txt
-```
-
----
-
-### Execução de Algoritmo
-Para executar um único algoritmo de busca e visualizar o caminho no mapa, utilize o subcomando `busca`:
-
-* **A* com Heurística Manhattan:**
-  ```bash
-  python -m scripts.run_experiments busca --map data/mapa_teste.txt --algorithm astar --heuristic manhattan
-  ```
-
-* **Busca Gulosa com Heurística Euclidiana:**
-  ```bash
-  python -m scripts.run_experiments busca --map data/mapa_teste.txt --algorithm greedy --heuristic euclidean
-  ```
-
-* **Busca em Largura (BFS):**
-  ```bash
-  python -m scripts.run_experiments busca --map data/mapa_teste.txt --algorithm bfs
-  ```
-
-* **Busca em Profundidade (DFS):**
-  ```bash
-  python -m scripts.run_experiments busca --map data/mapa_teste.txt --algorithm dfs
-  ```
-
-* **Busca de Custo Uniforme (UCS):**
-  ```bash
-  python -m scripts.run_experiments busca --map data/mapa_teste.txt --algorithm uniform_cost
-  ```
 
 ---
